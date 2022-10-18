@@ -1,27 +1,54 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import Header from '../components/Header'
+import AddCommentForm from '../features/comments/AddCommentForm'
+import CommentList from '../features/comments/CommentList'
 
-
-import styled from 'styled-components'
-import { FcFullTrash, FcSupport } from "react-icons/fc";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { __getTodos } from '../redux/modules/todosSlice';
+import { __editTodos, __getTodos } from '../redux/modules/todosSlice';
+
+/** CSS */
+import styled from 'styled-components'
+import { FcFullTrash, FcSupport } from "react-icons/fc";
+import Swal from 'sweetalert2'
+
 
 const Detail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const { id } = useParams()
-    const todos = useSelector((state) => state.todos)
 
-    console.log("todos", todos)
+
+    const { id } = useParams()
+    const { todos } = useSelector((state) => state.todos)
+    const todo = todos.find((todo) => todo.id === +id)
+
+    const [isEdit, setIsEdit] = useState(false)
+
+    const [editTodo, setEditTodo] = useState({
+        title: todo?.title,
+        body: todo?.body
+    })
+
 
     useEffect(() => {
         dispatch(__getTodos())
     }, [dispatch])
 
+    const onEditHandler = (e) => {
+        e.preventDefault()
+        if (editTodo.title === "" || editTodo.body === "") { //바디나 타이틀에 빈칸이 있을때
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '모두 입력해주세요!😥',
+            })
+        }
+        if (editTodo.title.trim() === "" || editTodo.body.trim() === "") return;
+        dispatch(__editTodos({ ...todo, ...editTodo }))
+        setIsEdit(false)
+    }
 
 
 
@@ -31,22 +58,29 @@ const Detail = () => {
                 <Header />
                 <DetailBox>
                     <BtnBox>
-                        <button><FcSupport /></button>
+
+                        <button onClick={() => setIsEdit(prev => !prev)}>{isEdit ? "취소" : <FcSupport />}</button>
                         <button><FcFullTrash /></button>
                     </BtnBox>
-                    <div>User Name: 김혁진</div>
-                    <TextBox>
-                        <h1>제목</h1>
-                        <p>내용</p>
-                    </TextBox>
+                    <div>User Name: {todo?.username} </div>
+                    {!isEdit ?
+                        <TextBox>
+                            <h1>{todo?.title}</h1>
+                            <p>{todo?.body}</p>
+                        </TextBox> : null}
+
+                    {isEdit ?
+                        <form>
+                            <input type="text" value={editTodo.title} onChange={(e) => { setEditTodo({ ...editTodo, title: e.target.value }) }} />
+                            <textarea type="text" value={editTodo.body} onChange={(e) => { setEditTodo({ ...editTodo, body: e.target.value }) }} />
+                            <button onClick={onEditHandler}>저장</button>
+                        </form> : null}
 
                     <div>
                         댓글
-                        <form>
-                            <input type="text"></input>
-                            <button>추가하기</button>
-                        </form>
-                        <div>댓글리스트</div>
+                        <AddCommentForm />
+                        댓글리스트
+                        <CommentList />
                     </div>
                 </DetailBox>
 

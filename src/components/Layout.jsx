@@ -27,3 +27,5 @@ const LayoutCss = styled.div`
     /* padding-top: 50px; */
     /* box-shadow: 0px 0px 10px #000000; */
 `
+
+export default Layout
