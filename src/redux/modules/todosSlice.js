@@ -52,6 +52,19 @@ export const __editTodos = createAsyncThunk(
   }
 );
 
+/**Thunk deleteTodos */
+export const __deleteTodos = createAsyncThunk(
+  "DELETE_TODO",
+  async (payload, thunkAPI) => {
+    try {
+      axios.delete(`http://localhost:3001/todos/${payload}`); //id?
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
+
 const todosSlice = createSlice({
   name: "todos",
   initialState,
@@ -86,8 +99,17 @@ const todosSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    //게시글 수정
-    [__editTodos.pending]: (state) => {
+      //삭제합니다
+    [__deleteTodos.fulfilled]: (state, action) => {
+      const bye = state.todos.findIndex((todo) => todo.id === action.payload);
+      //id값일치 된거 하나 삭제.
+      state.todos.splice(bye, 1);
+
+      // state.isLoading = false;
+      // state.todo = action.payload;
+    },
+     //게시글 수정
+     [__editTodos.pending]: (state) => {
       state.isLoading = true;
     },
     [__editTodos.fulfilled]: (state, action) => {
