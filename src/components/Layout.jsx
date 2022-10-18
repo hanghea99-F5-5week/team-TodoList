@@ -3,11 +3,11 @@ import React from "react";
 import styled from "styled-components";
 
 const Layout = (props) => {
-  return (
-    <Container fixed>
-      <LayoutCss>{props.children}</LayoutCss>
-    </Container>
-  );
+    return (
+        <Container fixed>
+            <LayoutCss>{props.children}</LayoutCss>
+        </Container>
+    );
 };
 
 export default Layout;

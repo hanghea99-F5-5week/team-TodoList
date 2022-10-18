@@ -21,6 +21,7 @@ export const __addTodos = createAsyncThunk(
     }
   }
 );
+
 /**Thunk getTodos */
 export const __getTodos = createAsyncThunk(
   "todos/getTodos",
@@ -29,6 +30,22 @@ export const __getTodos = createAsyncThunk(
       const data = await axios.get("http://localhost:3001/todos");
 
       return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+/**Thunk editTodos */
+export const __editTodos = createAsyncThunk(
+  "todos/editTodos",
+  async (todoId, thunkAPI) => {
+    console.log("id", todoId);
+    try {
+      const { data } = await axios.patch(
+        `http://localhost:3001/todos/${todoId.id}`,
+        todoId
+      );
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -82,8 +99,7 @@ const todosSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-
-    //삭제합니다
+      //삭제합니다
     [__deleteTodos.fulfilled]: (state, action) => {
       const bye = state.todos.findIndex((todo) => todo.id === action.payload);
       //id값일치 된거 하나 삭제.
@@ -91,6 +107,20 @@ const todosSlice = createSlice({
 
       // state.isLoading = false;
       // state.todo = action.payload;
+    },
+     //게시글 수정
+     [__editTodos.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__editTodos.fulfilled]: (state, action) => {
+      const target = state.todos.findIndex(
+        (todo) => todo.id === action.payload.id
+      );
+      state.todos.splice(target, 1, action.payload);
+    },
+    [__editTodos.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.todos = action.payload;
     },
   },
 });
