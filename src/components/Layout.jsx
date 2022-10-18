@@ -14,7 +14,7 @@ const Layout = (props) => {
     )
 }
 
-export default Layout
+
 
 const LayoutCss = styled.div`
     margin: 80px auto;
