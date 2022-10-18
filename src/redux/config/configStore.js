@@ -5,7 +5,7 @@ import commentList from "../modules/commentListSlice";
 import todos from "../modules/todosSlice";
 import logger from "redux-logger";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     todos,
     commentList,
@@ -15,3 +15,5 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(logger),
 });
+
+export default store;
