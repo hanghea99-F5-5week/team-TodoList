@@ -20,6 +20,6 @@
 > 📌 상세페이지 댓글 구현 수정, 삭제 가능  
 
 ### 📙 멤버 정보
-😎 [Frontend] 김혁진 / 🔗 https://github.com/rklskhj
+😎 [Frontend] 김혁진 / 🔗 https://github.com/rklskhj  
 😘 [Frontend] 배인원 / 🔗 https://github.com/wonstruckk
 
