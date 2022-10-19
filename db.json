@@ -1,11 +1,4 @@
 {
-  "todos": [
-    {
-      "username": "sdf",
-      "title": "sdf",
-      "body": "sdf",
-      "id": 1666186478956
-    }
-  ],
+  "todos": [],
   "comments": []
 }

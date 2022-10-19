@@ -12,16 +12,10 @@ const Comment = ({ comment }) => {
 
     const dispatch = useDispatch()
 
-
-
-
     const [isEdit, setIsEdit] = useState(false)
     const [editComment, setEditComment] = useState({
         content: comment.content
     })
-
-
-
 
     const onCommentEdit = (e) => {
         e.preventDefault()
@@ -38,14 +32,33 @@ const Comment = ({ comment }) => {
 
     }
 
-
     const onCommentDelete = () => {
         dispatch(__deleteComments(comment.id))
     }
+
+    function displayedAt(createdAt) {
+        console.log(createdAt)
+        const milliSeconds = new Date() - createdAt
+        const seconds = milliSeconds / 1000
+        if (seconds < 60) return `방금 전`
+        const minutes = seconds / 60
+        if (minutes < 60) return `${Math.floor(minutes)}분 전`
+        const hours = minutes / 60
+        if (hours < 24) return `${Math.floor(hours)}시간 전`
+        const days = hours / 24
+        if (days < 7) return `${Math.floor(days)}일 전`
+        const weeks = days / 7
+        if (weeks < 5) return `${Math.floor(weeks)}주 전`
+        const months = days / 30
+        if (months < 12) return `${Math.floor(months)}개월 전`
+        const years = days / 365
+        return `${Math.floor(years)}년 전`
+    }
+
     return (
         <CommentBox>
             <FcIphone style={{ fontSize: "35px" }} className='btnIcon' />
-            {!isEdit ? <TextBox>{comment.content}</TextBox> :
+            {!isEdit ? <TextBox><p>{comment.content}</p><p>{displayedAt(comment.id)}</p></TextBox> :
                 <FormBox>
                     <input type="text" value={editComment.content} onChange={(e) => { setEditComment({ ...editComment, content: e.target.value }) }} />
                     <Button id="inpBox" size="size3" onClick={onCommentEdit}><FcCheckmark className='btnIcon' /></Button>
@@ -96,6 +109,8 @@ const CommentBox = styled.div`
 `
 const TextBox = styled.div`
     /* background-color: orange; */
+    display:flex;
+    justify-content:space-between;
     margin-right: 20px;
     max-width:250px;
     width:100%;

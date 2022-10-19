@@ -29,7 +29,9 @@ export const __getComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get("http://localhost:3001/comments");
-      return thunkAPI.fulfillWithValue(data);
+      const newData = data.sort((a, b) => b.id - a.id); //내림차순
+      console.log("new", newData);
+      return thunkAPI.fulfillWithValue(newData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -77,7 +79,7 @@ const commentListSlice = createSlice({
     },
     [__addComments.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.comments.push(action.payload);
+      state.comments.unshift(action.payload); // push 반대로 입력
     },
     [__addComments.rejected]: (state, action) => {
       state.isLoading = false;
