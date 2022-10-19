@@ -84,7 +84,7 @@ const Stack = styled.div`
     align-items: center;
     
     width: 300px;
-    height: 280px;
+    height: 325px;
     margin: 80px auto;
     flex-direction: column;
 

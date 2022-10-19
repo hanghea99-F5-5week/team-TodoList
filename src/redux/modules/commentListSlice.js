@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_COMMENTS_URL;
+
 const initialState = {
   comments: [],
   isLoading: false,
@@ -12,10 +14,7 @@ export const __addComments = createAsyncThunk(
   "commentList/addCommnets",
   async (commentData, thunkAPI) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:3001/comments",
-        commentData
-      );
+      const { data } = await axios.post(BASE_URL, commentData);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -28,7 +27,7 @@ export const __getComments = createAsyncThunk(
   "commentList/getComments",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/comments");
+      const { data } = await axios.get(BASE_URL);
       const newData = data.sort((a, b) => b.id - a.id); //내림차순
       console.log("new", newData);
       return thunkAPI.fulfillWithValue(newData);
@@ -43,7 +42,7 @@ export const __deleteComments = createAsyncThunk(
   "commentLists/deleteComments",
   async (commentId, thunkAPI) => {
     try {
-      await axios.delete(`http://localhost:3001/comments/${commentId}`);
+      await axios.delete(`${BASE_URL}/${commentId}`);
       return thunkAPI.fulfillWithValue(commentId);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -57,7 +56,7 @@ export const __editComments = createAsyncThunk(
   async (commentId, thunkAPI) => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:3001/comments/${commentId.id}`,
+        `${BASE_URL}/${commentId.id}`,
         commentId
       );
 

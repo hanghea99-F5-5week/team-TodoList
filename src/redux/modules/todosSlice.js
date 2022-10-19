@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_TODOS_URL;
+
 const initialState = {
   todos: [],
   error: null,
@@ -13,7 +15,8 @@ export const __addTodos = createAsyncThunk(
   "todos/addTodos",
   async (todoData, thunkAPI) => {
     try {
-      const data = await axios.post("http://localhost:3001/todos", todoData);
+      console.log("base", BASE_URL);
+      const data = await axios.post(BASE_URL, todoData);
       // console.log(todoData);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -27,7 +30,7 @@ export const __getTodos = createAsyncThunk(
   "todos/getTodos",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get("http://localhost:3001/todos");
+      const data = await axios.get(BASE_URL);
 
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -41,10 +44,7 @@ export const __editTodos = createAsyncThunk(
   async (todoId, thunkAPI) => {
     console.log("id", todoId);
     try {
-      const { data } = await axios.patch(
-        `http://localhost:3001/todos/${todoId.id}`,
-        todoId
-      );
+      const { data } = await axios.patch(`${BASE_URL}/${todoId.id}`, todoId);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -57,7 +57,7 @@ export const __deleteTodos = createAsyncThunk(
   "DELETE_TODO",
   async (payload, thunkAPI) => {
     try {
-      axios.delete(`http://localhost:3001/todos/${payload}`); //id?
+      axios.delete(`${BASE_URL}/${payload}`); //id?
       return thunkAPI.fulfillWithValue(payload);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
