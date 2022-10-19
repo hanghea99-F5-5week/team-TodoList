@@ -13,4 +13,9 @@
 ### 📙 기술정보
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white"> <img src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=black"> <img src="https://img.shields.io/badge/Yarn-2C8EBB?style=for-the-badge&logo=YarnColor=white">
 
+### 📙 주요 기능
+📌 간단한 게시글 작성
+📌 게시글 상세페이지 보기
+📌 상세페이지 본문 내용 수정, 삭제 기능 구현
+📌 상세페이지 댓글 구현 수정, 삭제 가능
 
