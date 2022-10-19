@@ -99,7 +99,7 @@ const todosSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-      //삭제합니다
+    //삭제합니다
     [__deleteTodos.fulfilled]: (state, action) => {
       const bye = state.todos.findIndex((todo) => todo.id === action.payload);
       //id값일치 된거 하나 삭제.
@@ -108,8 +108,8 @@ const todosSlice = createSlice({
       // state.isLoading = false;
       // state.todo = action.payload;
     },
-     //게시글 수정
-     [__editTodos.pending]: (state) => {
+    //게시글 수정
+    [__editTodos.pending]: (state) => {
       state.isLoading = true;
     },
     [__editTodos.fulfilled]: (state, action) => {

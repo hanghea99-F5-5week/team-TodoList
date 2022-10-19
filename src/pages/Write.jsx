@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
 import Button from '../elem/button'
+import useInput from "../hooks/useInput";
 
 import styled from 'styled-components'
 import Swal from 'sweetalert2'
@@ -18,12 +19,14 @@ const Write = () => {
         title: "",
         body: "",
     }
-    const [write, setWrite] = useState(initialstate);
-    const onChangeHandler = (e) => {
-        const { name, value } = e.target;
-        setWrite({ ...write, [name]: value })
-    }
-    // console.log("wt", write)
+    const { inputs: write, onChange, reset } = useInput(initialstate);
+
+    // const [write, setWrite] = useState(initialstate);
+    //   const onChangeHandler = (e) => {
+    //     const { name, value } = e.target;
+    //     setWrite({ ...write, [name]: value });
+    //   };
+    //   console.log("wt", write);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -37,7 +40,7 @@ const Write = () => {
         if (write.username.trim() === "" || write.title.trim() === "" || write.body.trim() === "") return;
         // dispatch(onSubmitTodo({ ...todo, id: Date.now() }))
         dispatch(__addTodos({ ...write, id: Date.now() }))
-        setWrite(initialstate);
+        reset();
         // window.history.back()
         navigate("/");
     }
@@ -49,9 +52,9 @@ const Write = () => {
             <Layout>
                 <Header />
                 <AddForm>
-                    <input type="text" name='username' value={write.username} onChange={onChangeHandler} placeholder='작성자' />
-                    <input type="text" name='title' value={write.title} onChange={onChangeHandler} placeholder='제목을 입력해주세요!' />
-                    <textarea type="text" name='body' id="inputBody" cols="30" rows="10" value={write.body} onChange={onChangeHandler} placeholder='내용을 입력해주세요!' />
+                    <input type="text" name='username' value={write.username} onChange={onChange} placeholder='작성자' />
+                    <input type="text" name='title' value={write.title} onChange={onChange} placeholder='제목을 입력해주세요!' />
+                    <textarea type="text" name='body' id="inputBody" cols="30" rows="10" value={write.body} onChange={onChange} placeholder='내용을 입력해주세요!' />
                     <Button size="size1" onClick={onSubmit}>추가하기</Button >
                 </AddForm>
             </Layout>
