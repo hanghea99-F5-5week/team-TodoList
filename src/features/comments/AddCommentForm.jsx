@@ -49,9 +49,11 @@ const CommentInputBox = styled.form`
     
     input{
         width:70%;
-        height:20px;
+        height:30px;
         border: none;
         border-bottom: 2px solid #FDC676;
+        font-size: 16px;
+        padding-bottom: 5px;
     }
     button{
         background-color: #FDC676;

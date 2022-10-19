@@ -21,11 +21,9 @@ const Main = () => {
     <Layout>
       <Header />
       <Stodos>
-        <Stodo>
-          {todos?.map((todo) => (
-            <Card key={todo.id} todo={todo} />
-          ))}
-        </Stodo>
+        {todos?.map((todo) => (
+          <Card key={todo.id} todo={todo} />
+        ))}
       </Stodos>
     </Layout>
   );
@@ -33,19 +31,23 @@ const Main = () => {
 
 export default Main;
 
-const Stodo = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  gap: 20px;
-  min-width: 300px;
-  width: 100%;
+// const Stodo = styled.div`
+//   height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   align-content: center;
+//   gap: 20px;
+//   min-width: 300px;
+//   width: 100%;
 
-  margin: 20px;
-`;
+//   margin: 20px 20px 20px 10px;
+// `;
 
 const Stodos = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   background-color: white;
 
   min-width: 300px;
@@ -53,14 +55,29 @@ const Stodos = styled.div`
   width: 30%;
   height: 70vh;
   margin: auto;
+  padding-top: 15px;
 
   box-shadow: 3px 5px 5px 1px gray;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  overflow-y: scroll;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #fdc676;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #ffe9ad;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
 `;
 
-// const DetailBox = styled.div`
+// const DetailBox = styled.div
 //     background-color: white;
 //     min-width: 300px;
 //     min-height: 400px;
@@ -73,7 +90,8 @@ const Stodos = styled.div`
 //     border-bottom-right-radius: 15px;
 //
 
-// const TextBox = styled.div`
+// const TextBox = styled.div
+
 //     /* background-color: gray; */
 //     height: 330px;
 //     margin: 20px auto;

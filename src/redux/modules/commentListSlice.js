@@ -41,9 +41,24 @@ export const __deleteComments = createAsyncThunk(
   "commentLists/deleteComments",
   async (commentId, thunkAPI) => {
     try {
-      const { data } = await axios.delete(
-        `http://localhost:3001/comments/${commentId}`
+      await axios.delete(`http://localhost:3001/comments/${commentId}`);
+      return thunkAPI.fulfillWithValue(commentId);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+/**Thunk editComment */
+export const __editComments = createAsyncThunk(
+  "commentLists/editComments",
+  async (commentId, thunkAPI) => {
+    try {
+      const { data } = await axios.patch(
+        `http://localhost:3001/comments/${commentId.id}`,
+        commentId
       );
+
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -68,6 +83,7 @@ const commentListSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
     /**댓글 가져오기 */
     [__getComments.pending]: (state) => {
       state.isLoading = true;
@@ -80,6 +96,7 @@ const commentListSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
     /**댓글 삭제하기 */
     [__deleteComments.pending]: (state) => {
       state.isLoading = true;
@@ -88,11 +105,28 @@ const commentListSlice = createSlice({
       console.log("ac", action);
       state.isLoading = false;
       const target = state.comments.findIndex(
-        (comment) => comment.comment.id === action.payload
+        (comment) => comment.id === action.payload
       );
       state.comments.splice(target, 1);
     },
     [__deleteComments.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    /**댓글 수정하기 */
+    [__editComments.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__editComments.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log("ac", action);
+      const target = state.comments.findIndex(
+        (comment) => comment.id === action.payload.id
+      );
+      state.comments.splice(target, 1, action.payload);
+    },
+    [__editComments.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

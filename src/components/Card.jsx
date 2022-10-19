@@ -1,11 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { VscTrash } from "react-icons/vsc";
 
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { FcFullTrash } from "react-icons/fc";
 import { __deleteTodos } from "../redux/modules/todosSlice";
-import Layout from "./Layout";
+
+import styled from "styled-components";
+import Swal from "sweetalert2";
 
 const Card = ({ todo }) => {
   const dispatch = useDispatch();
@@ -27,15 +28,27 @@ const Card = ({ todo }) => {
           <STButton
             onClick={(e) => {
               e.stopPropagation();
-              const result = window.confirm("삭제 하쉴?");
-              if (result) {
-                return onDeleteHandler();
-              } else {
-                return;
-              }
+              Swal.fire({
+                title: '삭제할까요?',
+                text: '게시글을 삭제 하겠시겠어요?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  onDeleteHandler()
+                  Swal.fire(
+                    '삭제 완료!',
+                    '게시글이 삭제 되었어요!',
+                    'success'
+                  )
+                }
+              })
             }}
           >
-            <VscTrash color="#FE531F"></VscTrash>
+            <FcFullTrash className="btnIcon" ></FcFullTrash>
           </STButton>
         </Stdiv>
 
@@ -80,12 +93,19 @@ const STButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: 30px;
-  border: 1px solid #eee;
-  background-color: #fff;
-  height: 30px;
-  border-radius: 8px;
-  background-color: white;
+  background-color: #FDC676;
+  min-width: 30px;
+  min-height:30px;
+  width: 10%;
+  height: 10%;
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px;
+  &:hover{
+  background-color: #f7be67;
+  }
   cursor: pointer;
+  .btnIcon {
+        font-size:15px;
+    }
 `;
