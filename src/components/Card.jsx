@@ -2,7 +2,7 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { VscTrash } from "react-icons/vsc";
+import { FcFullTrash } from "react-icons/fc";
 import { __deleteTodos } from "../redux/modules/todosSlice";
 
 import styled from "styled-components";
@@ -48,7 +48,7 @@ const Card = ({ todo }) => {
               })
             }}
           >
-            <VscTrash color="#FE531F"></VscTrash>
+            <FcFullTrash className="btnIcon" ></FcFullTrash>
           </STButton>
         </Stdiv>
 
@@ -64,19 +64,18 @@ const Stdiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+
   margin: auto;
 `;
 
 const StCard = styled.div`
-  min-width: 250px;
-  width: 50%;
+  width: 85%;
   margin: 5px 15px 5px 15px;
   padding: 12px;
   height: 90px;
   border: 1px solid #ddd;
   background-color: #fff;
   border-radius: 12px;
-  overflow: auto;
 
   display: flex;
   justify-content: space-between;
@@ -87,19 +86,30 @@ const StCard = styled.div`
 const StText = styled.div`
   font-size: 25px;
   margin-bottom: 10px;
-  
+  width: 200px;
+  //set
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const STButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: 30px;
-  border: 1px solid #eee;
-  background-color: #fff;
-  height: 30px;
-  border-radius: 8px;
-  background-color: white;
+  background-color: #FDC676;
+  min-width: 30px;
+  min-height:30px;
+  width: 10%;
+  height: 10%;
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px;
+  &:hover{
+  background-color: #f7be67;
+  }
   cursor: pointer;
+  .btnIcon {
+        font-size:15px;
+    }
 `;
