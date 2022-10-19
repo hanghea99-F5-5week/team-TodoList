@@ -39,8 +39,10 @@ const Stodo = styled.div`
   flex-direction: column;
   align-content: center;
   gap: 20px;
+  min-width: 300px;
+  width: 100%;
 
-  margin: 20px 10px 20px 10px;
+  margin: 20px 20px 20px 10px;
 `;
 
 const Stodos = styled.div`
