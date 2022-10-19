@@ -51,18 +51,19 @@ const Stdiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-
   margin: auto;
 `;
 
 const StCard = styled.div`
-  width: 85%;
+  min-width: 250px;
+  width: 50%;
   margin: 5px 15px 5px 15px;
   padding: 12px;
   height: 90px;
   border: 1px solid #ddd;
   background-color: #fff;
   border-radius: 12px;
+  overflow: auto;
 
   display: flex;
   justify-content: space-between;
@@ -73,11 +74,6 @@ const StCard = styled.div`
 const StText = styled.div`
   font-size: 25px;
   margin-bottom: 10px;
-  width: 200px;
-  //set
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 `;
 
 const STButton = styled.div`

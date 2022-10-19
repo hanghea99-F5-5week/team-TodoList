@@ -42,7 +42,7 @@ const Stodo = styled.div`
   min-width: 300px;
   width: 100%;
 
-  margin: 20px 20px 20px 10px;
+  margin: 20px;
 `;
 
 const Stodos = styled.div`
@@ -50,7 +50,7 @@ const Stodos = styled.div`
 
   min-width: 300px;
   min-height: 50%;
-  width: 50%;
+  width: 30%;
   height: 70vh;
   margin: auto;
 
