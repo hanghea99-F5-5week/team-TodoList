@@ -75,8 +75,8 @@ const AddForm = styled.form`
     gap: 20px;
     padding: 20px 20px 30px 20px;
     box-shadow: 3px 5px 5px 1px gray;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     /* border: 2px solid gray; */
     input{
         width: 100%;

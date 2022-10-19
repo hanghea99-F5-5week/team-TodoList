@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
-import { FcHome } from "react-icons/fc";
+import { FcHome, FcSurvey } from "react-icons/fc";
 import { FcAdvertising } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
@@ -17,14 +17,20 @@ const Header = () => {
 
       <h2>Today's Comment</h2>
 
-      <h2
+      {/* <h2
         className="write"
         onClick={() => {
           navigate("/write/add");
         }}
       >
-        <FcAdvertising className="homeIcon" />
-      </h2>
+      </h2> */}
+      <Link to="/write/add">
+        ME
+        <FcSurvey className="homeIcon" />
+        MO
+      </Link>
+
+
     </Container>
   );
 };
@@ -37,8 +43,8 @@ const Container = styled.div`
   margin: auto;
   height: 45px;
   box-shadow: 3px 5px 5px 1px gray;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   background-color: #fdc676;
   padding: 10px;
   display: flex;
@@ -50,13 +56,10 @@ const Container = styled.div`
     cursor: pointer;
   }
   h2 {
+    font-size:17px;
     text-decoration: underline;
     text-underline-position: under;
   }
 
-  h2.write {
-    text-decoration: underline;
-    text-underline-position: under;
-    cursor: pointer;
-  }
+
 `;

@@ -1,11 +1,12 @@
 import React from "react";
+
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { VscTrash } from "react-icons/vsc";
-
 import { __deleteTodos } from "../redux/modules/todosSlice";
-import Layout from "./Layout";
+
+import styled from "styled-components";
+import Swal from "sweetalert2";
 
 const Card = ({ todo }) => {
   const dispatch = useDispatch();
@@ -27,12 +28,24 @@ const Card = ({ todo }) => {
           <STButton
             onClick={(e) => {
               e.stopPropagation();
-              const result = window.confirm("삭제 하쉴?");
-              if (result) {
-                return onDeleteHandler();
-              } else {
-                return;
-              }
+              Swal.fire({
+                title: '삭제할까요?',
+                text: '게시글을 삭제 하겠시겠어요?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  onDeleteHandler()
+                  Swal.fire(
+                    '삭제 완료!',
+                    '게시글이 삭제 되었어요!',
+                    'success'
+                  )
+                }
+              })
             }}
           >
             <VscTrash color="#FE531F"></VscTrash>
@@ -74,6 +87,7 @@ const StCard = styled.div`
 const StText = styled.div`
   font-size: 25px;
   margin-bottom: 10px;
+  
 `;
 
 const STButton = styled.div`

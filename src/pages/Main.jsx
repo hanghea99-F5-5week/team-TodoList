@@ -53,9 +53,26 @@ const Stodos = styled.div`
   margin: auto;
 
   box-shadow: 3px 5px 5px 1px gray;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  overflow-y: scroll;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+    
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #FDC676;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #FFE9AD;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+
+
 `;
 
 // const DetailBox = styled.div`
