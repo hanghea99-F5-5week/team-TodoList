@@ -1,9 +1,10 @@
 import React from "react";
-
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FcFullTrash } from "react-icons/fc";
 import { __deleteTodos } from "../redux/modules/todosSlice";
+
+
 
 import styled from "styled-components";
 import Swal from "sweetalert2";
@@ -15,6 +16,7 @@ const Card = ({ todo }) => {
   const onDeleteHandler = () => {
     dispatch(__deleteTodos(todo.id));
   };
+
 
   return (
     <StCard
@@ -81,7 +83,16 @@ const StCard = styled.div`
   justify-content: space-between;
   align-content: center;
   align-items: center;
+
+  &:hover {
+    box-shadow: 2px 2px 3px  gray;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
 `;
+
 
 const StText = styled.div`
   font-size: 25px;

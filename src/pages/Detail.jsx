@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import Header from '../components/Header'
 import AddCommentForm from '../features/comments/AddCommentForm'
 import CommentList from '../features/comments/CommentList'
+import Button from '../elem/button'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -85,8 +86,8 @@ const Detail = () => {
                     <BtnBox>
                         <div>User Name: {todo?.username} </div>
                         <div>
-                            <button onClick={() => setIsEdit(prev => !prev)}>{isEdit ? <FcCancel className='btnIcon' /> : <FcSettings className='btnIcon' />}</button>
-                            <button onClick={onDeleteHandler}><FcFullTrash className='btnIcon' /></button>
+                            <Button size="size2" onClick={() => setIsEdit(prev => !prev)}>{isEdit ? <FcCancel className='btnIcon' /> : <FcSettings className='btnIcon' />}</Button>
+                            <Button size="size2" onClick={onDeleteHandler}><FcFullTrash className='btnIcon' /></Button>
                         </div>
                     </BtnBox>
 
@@ -122,14 +123,19 @@ export default Detail
 const DetailBox = styled.div`
     background-color: white;
     min-width: 300px;
-    min-height: 400px;
-    width: 50%;
-    height: 70vh;
+    min-height: 695px;
+    width: 100%;
+    height: 100%;
     margin: auto;
-    padding: 20px 20px 30px 20px;
+    padding: 20px 20px 20px 20px;
     box-shadow: 3px 5px 5px 1px gray;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+
+    @media (max-width: 480px) {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 `
 
 const BtnBox = styled.div`
@@ -137,19 +143,6 @@ const BtnBox = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    button{
-        background-color: #FDC676;
-        min-width: 40px;
-        min-height:30px;
-        width: 13%;
-        height: 10%;
-        border-radius: 5px;
-        border: none;
-        margin-left: 10px;
-        &:hover{
-        background-color: #f7be67;
-    }
-    }
     .btnIcon {
         font-size:20px;
     }
@@ -169,7 +162,7 @@ const TextBox = styled.div`
 `
 
 const CommentWrap = styled.div`
-    height:200px;
+    height:310px;
     overflow: auto;
     &::-webkit-scrollbar {
     width: 10px;

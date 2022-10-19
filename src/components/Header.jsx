@@ -39,7 +39,7 @@ export default Header;
 
 const Container = styled.div`
   min-width: 300px;
-  width: 50%;
+  width: 100%;
   margin: auto;
   height: 45px;
   box-shadow: 3px 5px 5px 1px gray;
@@ -60,6 +60,9 @@ const Container = styled.div`
     text-decoration: underline;
     text-underline-position: under;
   }
-
+  @media (max-width: 480px) {
+    border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
 
 `;

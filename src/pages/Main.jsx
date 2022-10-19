@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { useEffect } from "react";
 import { __getTodos } from "../redux/modules/todosSlice";
+
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 import Header from "../components/Header";
 
+import styled from "styled-components";
 const Main = () => {
   const dispatch = useDispatch();
 
@@ -16,32 +17,25 @@ const Main = () => {
     dispatch(__getTodos());
   }, [dispatch]);
 
+
   console.log(todos);
   return (
     <Layout>
       <Header />
       <Stodos>
-        {todos?.map((todo) => (
-          <Card key={todo.id} todo={todo} />
-        ))}
+        {todos.length === 0 ?
+          <Stack>
+            <img className="phoneImage" alt="르탄이1" src="img/르탄이1.png" />
+            <h1>현재는 아무것도 없네요!</h1>
+          </Stack> : <>{todos?.map((todo) => (
+            <Card key={todo.id} todo={todo} />
+          ))}</>}
       </Stodos>
     </Layout>
   );
 };
 
 export default Main;
-
-// const Stodo = styled.div`
-//   height: 100vh;
-//   display: flex;
-//   flex-direction: column;
-//   align-content: center;
-//   gap: 20px;
-//   min-width: 300px;
-//   width: 100%;
-
-//   margin: 20px 20px 20px 10px;
-// `;
 
 const Stodos = styled.div`
   display: flex;
@@ -51,9 +45,9 @@ const Stodos = styled.div`
   background-color: white;
 
   min-width: 300px;
-  min-height: 50%;
-  width: 50%;
-  height: 70vh;
+  min-height: 695px;
+  width: 100%;
+  height: 100%;
   margin: auto;
   padding-top: 15px;
 
@@ -76,27 +70,28 @@ const Stodos = styled.div`
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }
-
+  @media (max-width: 480px) {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 
 `;
 
-// const DetailBox = styled.div`
-//     background-color: white;
-//     min-width: 300px;
-//     min-height: 400px;
-//     width: 50%;
-//     height: 70vh;
-//     margin: auto;
-//     padding: 20px 20px 30px 20px;
-//     box-shadow: 3px 5px 5px 1px gray;
-//     border-bottom-left-radius: 15px;
-//     border-bottom-right-radius: 15px;
-//
+const Stack = styled.div`
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    
+    width: 300px;
+    height: 280px;
+    margin: 80px auto;
+    flex-direction: column;
 
-// const TextBox = styled.div`
-//     /* background-color: gray; */
-//     height: 330px;
-//     margin: 20px auto;
-//     h1{
-//         margin-bottom: 50px;
-//     }
+    img{
+      width: 200px;
+      height: 200px;
+      margin-bottom: 20px;
+    }
+`
+

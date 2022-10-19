@@ -1,53 +1,17 @@
 {
   "todos": [
     {
-      "username": "이상한사람",
-      "title": "발 없는 말이",
-      "body": "안타깝다...ㅠㅠ!",
-      "id": 1666105469496
+      "username": "fff",
+      "title": "ffff",
+      "body": "ffffff",
+      "id": 1666170839617
     },
     {
-      "username": "좋은아침",
-      "title": "하하",
-      "body": "하하하",
-      "id": 1666144065992
-    },
-    {
-      "username": "asd",
-      "title": "sd",
-      "body": "sd",
-      "id": 1666155832547
-    },
-    {
-      "username": "asd",
-      "title": "sd",
-      "body": "sd",
-      "id": 1666155836112
-    },
-    {
-      "username": "asd",
-      "title": "asd",
-      "body": "asd",
-      "id": 1666155839059
-    },
-    {
-      "username": "asd",
-      "title": "asd",
-      "body": "asd",
-      "id": 1666155842770
-    },
-    {
-      "username": "asd",
-      "title": "sds",
-      "body": "sdsd",
-      "id": 1666156071828
+      "username": "ddd",
+      "title": "ddd",
+      "body": "dddd",
+      "id": 1666182205465
     }
   ],
-  "comments": [
-    {
-      "content": "ㄹㅇㄴㅇㄹ",
-      "id": 1666154233779,
-      "todoId": 1666144065992
-    }
-  ]
+  "comments": []
 }

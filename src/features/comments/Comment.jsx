@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { __deleteComments, __editComments } from '../../redux/modules/commentListSlice'
+import Button from '../../elem/button'
 
 
 import styled from 'styled-components'
@@ -43,14 +44,14 @@ const Comment = ({ comment }) => {
     }
     return (
         <CommentBox>
-            <FcIphone className='btnIcon' />
+            <FcIphone style={{ fontSize: "35px" }} className='btnIcon' />
             {!isEdit ? <TextBox>{comment.content}</TextBox> :
                 <FormBox>
                     <input type="text" value={editComment.content} onChange={(e) => { setEditComment({ ...editComment, content: e.target.value }) }} />
-                    <button onClick={onCommentEdit}><FcCheckmark className='btnIcon' /></button>
+                    <Button id="inpBox" size="size3" onClick={onCommentEdit}><FcCheckmark className='btnIcon' /></Button>
                 </FormBox>}
-            <button onClick={() => setIsEdit(prev => !prev)}>{isEdit ? <FcCancel className='btnIcon' /> : <FcEditImage className='btnIcon' />}</button>
-            {!isEdit ? <button onClick={(e) => {
+            <Button size="size3" onClick={() => setIsEdit(prev => !prev)}>{isEdit ? <FcCancel className='btnIcon' /> : <FcEditImage className='btnIcon' />}</Button>
+            {!isEdit ? <Button size="size3" onClick={(e) => {
                 e.stopPropagation();
                 Swal.fire({
                     title: '삭제할까요?',
@@ -73,7 +74,7 @@ const Comment = ({ comment }) => {
             }
 
             }
-            ><FcFullTrash className='btnIcon' /></button> : null}
+            ><FcFullTrash className='btnIcon' /></Button> : null}
         </CommentBox>
     )
 }
@@ -85,23 +86,9 @@ const CommentBox = styled.div`
     flex-direction: row;
     align-items: center;
     align-content: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 10px;
 
-    button{
-        background-color: #FDC676;
-        min-width: 30px;
-        min-height:30px;
-        width: 13%;
-        height: 10%;
-        border-radius: 5px;
-        border: none;
-        margin-left: 10px;
-        &:hover{
-        background-color: #f7be67;
-        
-        }
-    }
     .btnIcon {
         font-size:20px;
     }
@@ -110,12 +97,12 @@ const CommentBox = styled.div`
 const TextBox = styled.div`
     /* background-color: orange; */
     margin-right: 20px;
-    max-width:200px;
+    max-width:250px;
     width:100%;
     height:15px;
     
     font-size: 15px;
-    padding-bottom: 23px;
+    padding-bottom: 20px;
    
     border: none;
     border-bottom: 1px solid #FDC676;
@@ -126,15 +113,20 @@ const FormBox = styled.form`
     align-items: center;
     
     input{
-        /* background-color: orange; */
-        /* margin-right: 40px; */
         max-width:354px;
-        width:223px;
+        width:255px;
         height:23px;
         font-size: 15px;
         padding-bottom: 2px;
         border: none;
         border-bottom: 1px solid #FDC676;
         border-right: 1px solid #FDC676;
+    }
+    #inpBox{
+        margin-left: 25px;
+        width: 54px;
+        @media (max-width: 480px) {
+            width:30px;
+    }
     }
 `

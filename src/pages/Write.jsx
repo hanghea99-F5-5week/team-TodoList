@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { __addTodos } from '../redux/modules/todosSlice'
 import { useNavigate } from 'react-router-dom'
+
 import Header from '../components/Header'
 import Layout from '../components/Layout'
+import Button from '../elem/button'
 
 import styled from 'styled-components'
 import Swal from 'sweetalert2'
@@ -50,7 +52,7 @@ const Write = () => {
                     <input type="text" name='username' value={write.username} onChange={onChangeHandler} placeholder='작성자' />
                     <input type="text" name='title' value={write.title} onChange={onChangeHandler} placeholder='제목을 입력해주세요!' />
                     <textarea type="text" name='body' id="inputBody" cols="30" rows="10" value={write.body} onChange={onChangeHandler} placeholder='내용을 입력해주세요!' />
-                    <InputBtn onClick={onSubmit}>추가하기</InputBtn>
+                    <Button size="size1" onClick={onSubmit}>추가하기</Button >
                 </AddForm>
             </Layout>
         </>
@@ -68,9 +70,9 @@ const AddForm = styled.form`
     flex-direction: column;
     align-items: center;
     min-width: 300px;
-    min-height: 400px;
-    width: 50%;
-    height: 70vh;
+    min-height: 695px;
+    width: 100%;
+    height: 100%;
     margin: auto;
     gap: 20px;
     padding: 20px 20px 30px 20px;
@@ -85,6 +87,7 @@ const AddForm = styled.form`
         margin-top:30px;
         border: none;
         border-bottom: 2px solid #FDC676;
+        font-size: 20px;
     }
     textarea{
         width: 100%;
@@ -94,18 +97,11 @@ const AddForm = styled.form`
         margin-top: 30px;
         border: none;
         border-bottom: 2px solid #FDC676;
+        font-size: 16px;
     }
-`
-const InputBtn = styled.button`
-    background-color: #FDC676;
-    min-width: 87px;
-    min-height:40px;
-    width: 30%;
-    height: 10%;
-    margin-top:15px;
-    border-radius: 5px;
-    border: none;
-    &:hover{
-        background-color: #f7be67;
-    }
+
+    @media (max-width: 480px) {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 `
